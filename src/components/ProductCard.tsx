@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function ProductCard() {
   return (
-    <div className=" h-auto relative bg-white overflow-hidden font-sans">
+    <div className="h-auto relative bg-white overflow-hidden font-sans">
       <div className="absolute top-5 left-5">
         <span className="text-red text-xs bg-white px-4 py-2 rounded-full font-semibold">Best Seller</span>
       </div>
