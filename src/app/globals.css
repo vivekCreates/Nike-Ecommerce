@@ -10,6 +10,7 @@ html,body{
     width: 100%;
 }
 
+
 @custom-variant dark (&:is(.dark *));
 
 @theme {
