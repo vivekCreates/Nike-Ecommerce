@@ -7,7 +7,7 @@ import Link from 'next/link';
 export default function Hero() {
     return (
         <section className="relative w-full min-h-[70vh] sm:min-h-[80vh] md:min-h-[92vh] bg-[url('/hero-bg.png')] bg-cover bg-center flex items-center justify-center">
-            <div className="relative z-10 flex flex-col-reverse md:flex-row w-full max-w-7xl mx-auto px-4 sm:px-8 py-10 md:py-0 items-center justify-between">
+            <div className="relative z-10 flex flex-col-reverse md:flex-row w-full max-w-8xl mx-auto px-4 sm:px-8 py-10 md:py-0 items-center justify-between">
                 <div className="w-full md:w-1/2 flex flex-col gap-4 items-center md:items-start text-center md:text-left">
                     <h2 className="text-red text-lg sm:text-2xl md:text-3xl font-medium">Bold & Sporty</h2>
                     <h1 className="text-dark-900 text-3xl sm:text-5xl md:text-6xl font-bold leading-tight md:leading-[1.1]">
@@ -26,7 +26,7 @@ export default function Hero() {
                     </Button>
                 </div>
                 <div className="w-full md:w-1/2 flex items-center justify-center mb-8 md:mb-0">
-                    <figure className="w-3/4 sm:w-2/3 md:w-full max-w-[400px] md:max-w-[500px] lg:max-w-[600px]">
+                    <figure className="w-3/4 sm:w-2/3 md:w-full max-w-[400px] md:max-w-[500px] lg:max-w-[700px]">
                         <Image
                             src={"/hero-shoe.png"}
                             alt="hero"
