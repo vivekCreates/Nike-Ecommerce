@@ -22,16 +22,16 @@ export default function DropDownMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="bg-light-200 p-2 w-40 mt-2 rounded-md shadow-sm flex flex-col items-center justify-center"
+        className="bg-light-200 z-10 p-2 w-40 mt-2 rounded-md shadow-sm flex flex-col items-center justify-center"
       >
         {NAV_ITEMS.map(({ href, label }) => (
           <Link key={label} href={href}>
-            <DropdownMenuItem className="hover:bg-light-300 outline-none p-2 w-36 rounded-md flex cursor-pointer justify-center sm:hidden">
+            <DropdownMenuItem className="hover:bg-light-300 outline-none py-1 w-36 rounded-md flex cursor-pointer justify-center sm:hidden">
               {label}
             </DropdownMenuItem>
           </Link>
         ))}
-        <DropdownMenuItem className="hover:bg-light-300 outline-none w-36 p-2 rounded-md flex cursor-pointer justify-center text-red-500">
+        <DropdownMenuItem className="hover:bg-light-300 outline-none w-36 py-1 rounded-md flex cursor-pointer justify-center text-red-500">
           Logout
         </DropdownMenuItem>
       </DropdownMenuContent>
