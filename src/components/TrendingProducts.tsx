@@ -26,15 +26,11 @@ export default function TrendingProducts() {
   return (
     <div className="min-h-screen bg-white">
       <div className="w-full p-10 mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        {/* Header */}
         <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-900">
           Trending Now
         </h1>
 
-
-        {/* Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-          {/* Secondary Products */}
           {products.slice(1).map((product) => (
             <div
               key={product.id}
@@ -55,7 +51,6 @@ export default function TrendingProducts() {
               </div>
             </div>
           ))}
-          {/* Featured Product - Full Width on Mobile, Left Column on Desktop */}
           <div className="lg:col-span-2 relative group overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
             <div className="relative h-64 sm:h-80 lg:h-96">
               <img
@@ -77,8 +72,6 @@ export default function TrendingProducts() {
               </div>
             </div>
           </div>
-
-          
         </div>
       </div>
     </div>

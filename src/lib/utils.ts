@@ -9,3 +9,9 @@ export function cn(...inputs: ClassValue[]) {
 export const firstLetterOfName = (str: string) => {
   return str.charAt(0).toUpperCase();
 }
+
+
+export const randomShoeImage = (arr: string[]) => {
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+}
