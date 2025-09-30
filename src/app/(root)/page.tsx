@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer'
 import Hero from '@/components/Hero'
 import NikeHeroSection from '@/components/NikeHeroSection'
 import ProductCard from '@/components/ProductCard'
@@ -12,6 +13,7 @@ export default function page() {
       <ProductSection/>
       <TrendingProducts/>
       <NikeHeroSection/>
+      
     </div>
   )
 }
