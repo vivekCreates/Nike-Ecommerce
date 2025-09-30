@@ -22,7 +22,7 @@ export default function DropDownMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="bg-light-200 z-10 p-2 w-40 mt-2 rounded-md shadow-sm flex flex-col items-center justify-center"
+        className="bg-light-200 z-50 p-2 w-40 mt-2 rounded-md shadow-sm flex flex-col items-center justify-center"
       >
         {NAV_ITEMS.map(({ href, label }) => (
           <Link key={label} href={href}>
