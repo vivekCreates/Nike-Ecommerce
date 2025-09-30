@@ -1,18 +1,18 @@
 import Image from 'next/image'
 import React from 'react'
 
-export default function ProductCard() {
+export default function ProductCard({name,price,imageUrl}:{name:string,imageUrl:string,price:number}) {
   return (
-    <div className="h-auto relative bg-white overflow-hidden font-sans">
-      <div className="absolute top-5 left-5">
-        <span className="text-red text-xs bg-white px-4 py-2 rounded-full font-semibold">Best Seller</span>
+    <div className="h-auto relative  bg-white overflow-hidden font-sans">
+      <div className="absolute top-5 left-5 z-20">
+        <span className="text-red text-xs bg-white  px-4 py-2 rounded-full font-semibold">Best Seller</span>
       </div>
       
-      <div className=" aspect-square bg-gray-50 flex items-center justify-center">
+      <div className="group overflow-hidden aspect-square bg-gray-50 flex items-center justify-center">
         <Image 
-          src="/shoes/shoe-1.jpg" 
-          alt="Nike Air Force 1 Mid '07" 
-          className="w-full h-full object-cover"
+          src={imageUrl} 
+          alt={name} 
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           width={200}
           height={150}
         />
@@ -21,10 +21,10 @@ export default function ProductCard() {
       <div className="px-3 py-4">
         <div className="flex items-start justify-between mb-1">
           <h3 className="text-sm font-medium text-gray-900 leading-tight flex-1">
-            Nike Air Force 1 Mid '07
+            {name}
           </h3>
           <span className="text-sm font-medium text-gray-900 ml-2">
-            $98.30
+           ${price}
           </span>
         </div>
         
