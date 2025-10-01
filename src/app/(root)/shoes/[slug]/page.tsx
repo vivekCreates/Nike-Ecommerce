@@ -1,5 +1,6 @@
 'use client';
 
+import ReviewSection from '@/components/ReviewSection';
 import ShoeImageCard from '@/components/ShoeImageCard';
 import ShoeSizes from '@/components/ShoeSizes';
 import { Button } from '@/components/ui/button';
@@ -97,6 +98,7 @@ export default function Page() {
                 showProductDesc &&
                 <p>The Air Max 90 stays true to its running roots with the iconic Waffle sole. Plus, stitched overlays and textured accents create the '90s look you love. Complete with romantic hues, its visible Air cushioning adds comfort to your journey..</p>
             }
+            <ReviewSection/>
           </div>
         </div>
       </div>
