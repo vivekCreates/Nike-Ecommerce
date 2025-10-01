@@ -47,7 +47,7 @@ export default function FilterSection() {
 
   return (
     <>
-      <div className="lg:hidden p-4 bg-light-200">
+      <div className="lg:hidden p-4 ">
         <button
           onClick={() => setMobileOpen(true)}
           className="flex items-center gap-2 px-2 py-2 sm:px-4 border rounded-lg text-sm font-medium"
@@ -57,18 +57,29 @@ export default function FilterSection() {
       </div>
 
       <aside
-        className={`
-          fixed top-0 left-0 h-full w-3/4 max-w-sm bg-light-200 shadow-lg p-6 z-50 
-          transform transition-transform duration-300 ease-in-out
-          ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
-          lg:relative lg:translate-x-0 lg:w-1/5 lg:min-h-screen lg:p-6
-        `}
-      >
-        <div className="flex justify-between items-center mb-6 lg:hidden">
+  className={`
+    transition-transform duration-300 ease-in-out bg-white
+    fixed top-0 left-0 z-50 h-full w-3/4 max-w-sm p-6
+    ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
+    lg:static lg:translate-x-0 lg:w-1/5 lg:min-h-screen lg:p-6
+  `}
+>
+        <div className="flex justify-between bg-white items-center mb-6 lg:hidden">
           <h2 className="text-lg font-bold">Filters</h2>
           <button onClick={() => setMobileOpen(false)} className="text-gray-500">
             ✕
           </button>
+        </div>
+
+        <div className='py-5'>
+          <h2 className='text-heading-3 mb-4 font-semibold'>New(500)</h2>
+          <ul className='flex flex-col gap-2'>
+          {
+            ["Low Top","High Top","Skateboarding","Nike By You"].map((opt)=>(
+              <li key={opt} className='text-sm'>{opt}</li>
+            ))
+          }
+          </ul>
         </div>
 
         <div className="border-t border-gray-200 py-4">
@@ -200,7 +211,7 @@ export default function FilterSection() {
      
       {mobileOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-40 z-40 lg:hidden"
+          className="fixed inset-0 bg-opacity-40 z-40 lg:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}

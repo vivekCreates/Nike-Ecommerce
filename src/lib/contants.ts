@@ -41,4 +41,64 @@ export const products = [
    price: 88.30,
    imageUrl:"/shoes/shoe-3.webp"
 },
+{  id: 4,
+   name: "Nike Air Force 1 Mid '07",
+   price: 98.30,
+   imageUrl:"/shoes/shoe-1.jpg"
+},
+{  id: 5,
+   name: "Nike Air Force",
+   price: 99.30,
+   imageUrl:"/shoes/shoe-2.webp"
+},
+{  id: 6,
+   name: "Nike React Presto",
+   price: 88.30,
+   imageUrl:"/shoes/shoe-3.webp"
+},
+{  id: 7,
+   name: "Nike Air Force 1 Mid '07",
+   price: 98.30,
+   imageUrl:"/shoes/shoe-1.jpg"
+},
+{  id: 8,
+   name: "Nike Air Force",
+   price: 99.30,
+   imageUrl:"/shoes/shoe-2.webp"
+},
+{  id: 9,
+   name: "Nike React Presto",
+   price: 88.30,
+   imageUrl:"/shoes/shoe-3.webp"
+},
+{  id: 10,
+   name: "Nike Air Force 1 Mid '07",
+   price: 98.30,
+   imageUrl:"/shoes/shoe-1.jpg"
+},
+{  id: 11,
+   name: "Nike Air Force",
+   price: 99.30,
+   imageUrl:"/shoes/shoe-2.webp"
+},
+{  id: 12,
+   name: "Nike React Presto",
+   price: 88.30,
+   imageUrl:"/shoes/shoe-3.webp"
+},
+{  id: 13,
+   name: "Nike Air Force 1 Mid '07",
+   price: 98.30,
+   imageUrl:"/shoes/shoe-1.jpg"
+},
+{  id: 14,
+   name: "Nike Air Force",
+   price: 99.30,
+   imageUrl:"/shoes/shoe-2.webp"
+},
+{  id: 15,
+   name: "Nike React Presto",
+   price: 88.30,
+   imageUrl:"/shoes/shoe-3.webp"
+}
 ]

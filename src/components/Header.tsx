@@ -11,7 +11,7 @@ import { Button } from "./ui/button";
 export default function Header() {
   const user = {}
   return (
-    <header className="w-full mx-auto py-3 px-4 sm:px-6 md:px-8 flex items-center justify-between">
+    <header className=" bg-white w-full mx-auto py-3 px-4 sm:px-6 md:px-8 flex items-center justify-between">
       <Link href="/" className="text-xl font-bold">
         <Image src={"/logo.png"} width={50} height={50} alt="logo" />
       </Link>
