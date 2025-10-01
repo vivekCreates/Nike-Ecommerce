@@ -1,12 +1,13 @@
 export const NAV_ITEMS = [
     {href: "/", label: "Home",},
-    {href:"/men" , label: "Men"},
+    {href:"men" , label: "Men"},
     {href:"women",label:"Women"},
+    {href:"kids" , label: "Men"},
     {href:"/collections" , label: "Collections"},
 ] as const;
 
 
-const shoes = [
+export const SHOES = [
     "/shoes/shoe-1.jpg",
     "/shoes/shoe-2.webp",
     "/shoes/shoe-3.webp",
