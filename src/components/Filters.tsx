@@ -8,7 +8,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 export default function FilterSection() {
   const params = useSearchParams();
   const router = useRouter()
- 
+
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     gender: true,
     kids: false,
@@ -17,13 +17,13 @@ export default function FilterSection() {
     sports: true
   });
 
-  const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({
-    gender: [],
-    kids: [],
-    price: [],
-    height: [],
-    sports: []
-  })
+  // const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({
+  //   gender: [],
+  //   kids: [],
+  //   price: [],
+  //   height: [],
+  //   sports: []
+  // })
 
   const toggleSection = (section: string) => {
     setExpandedSections(prev => ({
@@ -47,38 +47,38 @@ export default function FilterSection() {
   // }
 
 
-  
-const handleFilterChange = (category: string, value: string) => {
-  setSelectedFilters((prev) => {
-      const prevValues = prev[category] || []
-      const exists = prevValues.includes(value)
 
-      return {
-        ...prev,
-        [category]: exists
-          ? prevValues.filter(v => v != value)
-          : [...prevValues, value]
-      }
-    })
-  const params = new URLSearchParams(window.location.search);
-  const values = params.getAll(category);
+  const handleFilterChange = (category: string, value: string) => {
+    // setSelectedFilters((prev) => {
+    //     const prevValues = prev[category] || []
+    //     const exists = prevValues.includes(value)
 
-  if (values.includes(value)) {
-    // remove value
-    const newValues = values.filter(v => v !== value);
-    params.delete(category);
-    newValues.forEach(v => params.append(category, v));
-  } else {
-    // add value
-    params.append(category, value);
-  }
+    //     return {
+    //       ...prev,
+    //       [category]: exists
+    //         ? prevValues.filter(v => v != value)
+    //         : [...prevValues, value]
+    //     }
+    //   })
+    const params = new URLSearchParams(window.location.search);
+    const values = params.getAll(category);
 
-  router.push(`?${params.toString()}`);
-};
+    if (values.includes(value)) {
+      // remove value
+      const newValues = values.filter(v => v !== value);
+      params.delete(category);
+      newValues.forEach(v => params.append(category, v));
+    } else {
+      // add value
+      params.append(category, value);
+    }
+
+    router.push(`?${params.toString()}`);
+  };
 
   return (
     <div className="w-[20%] p-10 min-h-screen">
-      {/* Header */}
+
       <div className="mb-6">
         <h2 className="text-xl font-bold mb-4">New (500)</h2>
         <div className="space-y-2">
@@ -89,7 +89,6 @@ const handleFilterChange = (category: string, value: string) => {
         </div>
       </div>
 
-      {/* Gender Filter */}
       <div className="border-t border-gray-200 py-4">
         <button
           onClick={() => toggleSection('gender')}
@@ -104,7 +103,6 @@ const handleFilterChange = (category: string, value: string) => {
               <input
                 onChange={() => handleFilterChange('gender', 'men')}
                 type="checkbox"
-                checked={selectedFilters.gender.includes('men')}
                 className="w-4 h-4 rounded border-gray-300" />
               <span className="ml-2 text-sm">Men</span>
             </label>
@@ -113,7 +111,7 @@ const handleFilterChange = (category: string, value: string) => {
                 type="checkbox"
                 className="w-4 h-4 rounded border-gray-300"
                 onChange={() => handleFilterChange('gender', 'women')}
-                checked={selectedFilters.gender.includes('women')}
+
               />
               <span className="ml-2 text-sm">Women</span>
             </label>
@@ -122,7 +120,7 @@ const handleFilterChange = (category: string, value: string) => {
                 type="checkbox"
                 className="w-4 h-4 rounded border-gray-300"
                 onChange={() => handleFilterChange('gender', 'unisex')}
-                checked={selectedFilters.gender.includes('unisex')}
+
               />
               <span className="ml-2 text-sm">Unisex</span>
             </label>
@@ -142,28 +140,26 @@ const handleFilterChange = (category: string, value: string) => {
         {expandedSections.kids && (
           <div className="space-y-2">
             <label className="flex items-center cursor-pointer">
-              <input 
-              type="checkbox"
-              className="w-4 h-4 rounded border-gray-300"
-              onChange={() => handleFilterChange('kids', 'boys')}
-                checked={selectedFilters.kids.includes('boys')}
-               />
+              <input
+                type="checkbox"
+                className="w-4 h-4 rounded border-gray-300"
+                onChange={() => handleFilterChange('kids', 'boys')}
+
+              />
               <span className="ml-2 text-sm">Boys</span>
             </label>
             <label className="flex items-center cursor-pointer">
-              <input 
-              type="checkbox"
-               className="w-4 h-4 rounded border-gray-300"
-               onChange={() => handleFilterChange('kids', 'girls')}
-                checked={selectedFilters.kids.includes('girls')}
-                />
+              <input
+                type="checkbox"
+                className="w-4 h-4 rounded border-gray-300"
+                onChange={() => handleFilterChange('kids', 'girls')}
+
+              />
               <span className="ml-2 text-sm">Girls</span>
             </label>
           </div>
         )}
       </div>
-
-      {/* Shop By Price Filter */}
       <div className="border-t border-gray-200 py-4">
         <button
           onClick={() => toggleSection('price')}
@@ -176,38 +172,38 @@ const handleFilterChange = (category: string, value: string) => {
           <div className="space-y-2">
             <label className="flex items-center cursor-pointer">
               <input
-               type="checkbox"
-              className="w-4 h-4 rounded border-gray-300"
-              onChange={() => handleFilterChange('price', '$25 - $50')}
-                checked={selectedFilters.price.includes('$25 - $50')}
-               />
+                type="checkbox"
+                className="w-4 h-4 rounded border-gray-300"
+                onChange={() => handleFilterChange('price', '$25 - $50')}
+
+              />
               <span className="ml-2 text-sm">$25 - $50</span>
             </label>
             <label className="flex items-center cursor-pointer">
-              <input 
-              type="checkbox"
-               className="w-4 h-4 rounded border-gray-300" 
+              <input
+                type="checkbox"
+                className="w-4 h-4 rounded border-gray-300"
                 onChange={() => handleFilterChange('price', '$50 - $100')}
-                checked={selectedFilters.price.includes('$50 - $100')}
-               />
-               
+
+              />
+
               <span className="ml-2 text-sm">$50 - $100</span>
             </label>
             <label className="flex items-center cursor-pointer">
-              <input type="checkbox" 
-              className="w-4 h-4 rounded border-gray-300"
-              onChange={() => handleFilterChange('price', '$100 - $150')}
-                checked={selectedFilters.price.includes('$100 - $150')}
-               />
+              <input type="checkbox"
+                className="w-4 h-4 rounded border-gray-300"
+                onChange={() => handleFilterChange('price', '$100 - $150')}
+
+              />
               <span className="ml-2 text-sm">$100 - $150</span>
             </label>
             <label className="flex items-center cursor-pointer">
-              <input 
-              type="checkbox" 
-              className="w-4 h-4 rounded border-gray-300" 
-              onChange={() => handleFilterChange('price', '$150')}
-                checked={selectedFilters.price.includes('$150')}
-              
+              <input
+                type="checkbox"
+                className="w-4 h-4 rounded border-gray-300"
+                onChange={() => handleFilterChange('price', '$150')}
+
+
               />
               <span className="ml-2 text-sm">Over $150</span>
             </label>
@@ -215,7 +211,6 @@ const handleFilterChange = (category: string, value: string) => {
         )}
       </div>
 
-      {/* Shoe Height Filter */}
       <div className="border-t border-gray-200 py-4">
         <button
           onClick={() => toggleSection('height')}
@@ -227,32 +222,32 @@ const handleFilterChange = (category: string, value: string) => {
         {expandedSections.height && (
           <div className="space-y-2">
             <label className="flex items-center cursor-pointer">
-              <input 
-              type="checkbox"
-               className="w-4 h-4 rounded border-gray-300"
-               onChange={() => handleFilterChange('height', 'low-top')}
-                checked={selectedFilters.height.includes('low-top')}
-                />
+              <input
+                type="checkbox"
+                className="w-4 h-4 rounded border-gray-300"
+                onChange={() => handleFilterChange('height', 'low-top')}
+
+              />
               <span className="ml-2 text-sm">Low Top</span>
             </label>
             <label className="flex items-center cursor-pointer">
-              <input type="checkbox" className="w-4 h-4 rounded border-gray-300"onChange={() => handleFilterChange('height', 'mid-top')}
-                checked={selectedFilters.height.includes('mid-top')} />
+              <input type="checkbox" className="w-4 h-4 rounded border-gray-300" onChange={() => handleFilterChange('height', 'mid-top')}
+
+              />
               <span className="ml-2 text-sm">Mid Top</span>
             </label>
             <label className="flex items-center cursor-pointer">
               <input type="checkbox"
-               className="w-4 h-4 rounded border-gray-300" 
-               onChange={() => handleFilterChange('height', 'high-top')}
-                checked={selectedFilters.height.includes('high-top')}
-                />
+                className="w-4 h-4 rounded border-gray-300"
+                onChange={() => handleFilterChange('height', 'high-top')}
+
+              />
               <span className="ml-2 text-sm">High Top</span>
             </label>
           </div>
         )}
       </div>
 
-      {/* Sports Filter */}
       <div className="border-t border-gray-200 py-4">
         <button
           onClick={() => toggleSection('sports')}
@@ -265,20 +260,20 @@ const handleFilterChange = (category: string, value: string) => {
           <div className="space-y-2">
             <label className="flex items-center cursor-pointer">
               <input type="checkbox" className="w-4 h-4 rounded border-gray-300"
-              onChange={() => handleFilterChange('sports', 'lifestyle')}
-                checked={selectedFilters.sports.includes('lifestyle')} />
+                onChange={() => handleFilterChange('sports', 'lifestyle')}
+              />
               <span className="ml-2 text-sm">Lifestyle</span>
             </label>
             <label className="flex items-center cursor-pointer">
-              <input type="checkbox" className="w-4 h-4 rounded border-gray-300" 
-              onChange={() => handleFilterChange('sports', 'Skateboarding')}
-                checked={selectedFilters.sports.includes('Skateboarding')}/>
+              <input type="checkbox" className="w-4 h-4 rounded border-gray-300"
+                onChange={() => handleFilterChange('sports', 'Skateboarding')}
+              />
               <span className="ml-2 text-sm">Skateboarding</span>
             </label>
             <label className="flex items-center cursor-pointer">
-              <input type="checkbox" className="w-4 h-4 rounded border-gray-300" 
-              onChange={() => handleFilterChange('sports', 'dance')}
-                checked={selectedFilters.sports.includes('dance')}/>
+              <input type="checkbox" className="w-4 h-4 rounded border-gray-300"
+                onChange={() => handleFilterChange('sports', 'dance')}
+              />
               <span className="ml-2 text-sm">Dance</span>
             </label>
           </div>
