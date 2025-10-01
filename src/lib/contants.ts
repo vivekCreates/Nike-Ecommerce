@@ -103,3 +103,12 @@ export const products = [
    imageUrl:"/shoes/shoe-3.webp"
 }
 ]
+
+
+export const profileOptions = [
+    'My Orders',
+    'Favourite',
+    'My Details',
+    'Payment Methods',
+    'Address Book'
+]

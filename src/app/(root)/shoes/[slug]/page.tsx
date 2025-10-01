@@ -1,10 +1,12 @@
 'use client';
 
+import ProductCard from '@/components/ProductCard';
+import ProductSection from '@/components/ProductSection';
 import ReviewSection from '@/components/ReviewSection';
 import ShoeImageCard from '@/components/ShoeImageCard';
 import ShoeSizes from '@/components/ShoeSizes';
 import { Button } from '@/components/ui/button';
-import { SHOES } from '@/lib/contants'
+import { products, SHOES } from '@/lib/contants'
 import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Heart } from 'lucide-react';
 import Image from 'next/image'
 import React, { useState } from 'react'
@@ -16,6 +18,7 @@ export default function Page() {
   const setShoeImage = (idx: number) => setSelectedImage(idx);
 
   return (
+    <>
     <div className="min-h-screen px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 py-6 md:py-10">
       <div className="flex flex-col lg:flex-row gap-6">
        
@@ -30,8 +33,9 @@ export default function Page() {
             />
           ))}
         </div>
+       
 
-        <figure className="relative w-full sm:w-[20rem] md:w-[24rem] lg:w-[28rem] h-[20rem] sm:h-[26rem] md:h-[30rem] lg:h-[34rem] rounded-md overflow-hidden flex justify-center items-center">
+        <figure className="relative w-full sm:w-fullmd:w-[24rem] lg:w-[28rem] h-[20rem] sm:h-[26rem] md:h-[30rem] lg:h-[34rem] rounded-md overflow-hidden flex justify-center items-center">
           <Image
             src={SHOES[selectedImage]}
             alt="shoe"
@@ -103,5 +107,16 @@ export default function Page() {
         </div>
       </div>
     </div>
+      <div className='flex-flex-col gap-6'>
+      <h1 className='text-heading-3 ml-4 sm:ml-6 md:ml-8 lg:ml-10 font-semibold'>You Might Also Like</h1>
+     <div className='min-h-screen w-full  grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-6 p-4 sm:p-6 md:8 lg:p-10'>
+                    {
+                     products.slice(0,3).map(({id,name,price,imageUrl})=>(
+                         <ProductCard key={id} name={name} price={price} imageUrl={imageUrl}/>
+                     ))
+                    }
+                 </div>
+      </div>
+      </>
   );
 }

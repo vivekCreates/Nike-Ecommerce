@@ -20,7 +20,7 @@ export default function Header() {
         <ul className="flex gap-4">
           {NAV_ITEMS.map(({ href, label }) => (
             <li key={label}>
-              <Link href={`${href=='men' || href=='women' || href=='kids' ? `/shoes?gender=${href}`:`${href}`} `} className="hover:underline">
+              <Link href={`${href=='men' || href=='women'  ? `/shoes?gender=${href}`:`${href}`} `} className="hover:underline">
                 {label}
               </Link>
             </li>
