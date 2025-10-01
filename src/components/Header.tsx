@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <header className="w-full mx-auto py-3 px-4 sm:px-6 md:px-8 flex items-center justify-between">
       <Link href="/" className="text-xl font-bold">
-        <Image src={"/logo.png"} priority width={50} height={50} alt="logo" className="bg-transparent" />
+        <Image src={"/logo.png"} width={50} height={50} alt="logo" />
       </Link>
 
       <nav className="hidden sm:block">
