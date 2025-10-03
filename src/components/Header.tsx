@@ -29,7 +29,9 @@ export default function Header() {
       </nav>
 
       <div className="flex gap-4 items-center">
+        <Link href={"/cart"}>
         <ShoppingCart />
+        </Link>
         {
           user ? <DropDownMenu/> : <Button variant={"outline"}>SignUp</Button>
         }
