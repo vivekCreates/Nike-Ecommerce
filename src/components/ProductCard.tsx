@@ -1,9 +1,18 @@
+'use client';
+
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
-export default function ProductCard({name,price,imageUrl}:{name:string,imageUrl:string,price:number}) {
+export default function ProductCard({id,name,price,imageUrl}:{id:number,name:string,imageUrl:string,price:number}) {
+  const router = useRouter();
+
+
   return (
-    <div className="h-auto relative  bg-white overflow-hidden font-sans">
+    <div 
+    className="h-auto relative  bg-white overflow-hidden font-sans"
+    onClick={()=>router.push(`/shoes/${id}`)}
+    >
       <div className="absolute top-5 left-5 z-20">
         <span className="text-red text-xs bg-white  px-4 py-2 rounded-full font-semibold">Best Seller</span>
       </div>
