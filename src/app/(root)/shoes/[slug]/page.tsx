@@ -12,6 +12,8 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 
 export default function Page() {
+
+
   const [selectedImage, setSelectedImage] = useState(0);
   const [showProductDesc,setShowProductDesc] = useState(true)
 
@@ -65,7 +67,7 @@ export default function Page() {
 
         <div className="w-full lg:max-w-lg flex flex-col gap-4 p-5 rounded-md">
           <div className="flex flex-col gap-2">
-            <h1 className="text-2xl md:text-3xl font-bold">Nike Max Air</h1>
+            <h1 className="text-2xl md:text-3xl font-bold">Max Air</h1>
             <p className="text-sm md:text-base">Women</p>
             <h1 className="text-xl md:text-2xl font-semibold">$140</h1>
             <p className="text-green-600 text-sm">Extra 20% off</p>
@@ -112,7 +114,7 @@ export default function Page() {
      <div className='min-h-screen w-full  grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-6 p-4 sm:p-6 md:8 lg:p-10'>
                     {
                      products.slice(0,3).map(({id,name,price,imageUrl})=>(
-                         <ProductCard key={id} name={name} price={price} imageUrl={imageUrl}/>
+                         <ProductCard id={id} key={id} name={name} price={price} imageUrl={imageUrl}/>
                      ))
                     }
                  </div>

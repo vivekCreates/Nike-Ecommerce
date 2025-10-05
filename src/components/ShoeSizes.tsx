@@ -9,8 +9,8 @@ export default function ShoeSizes() {
     return (
         <div className='flex gap-2 flex-wrap '>
             {
-                SIZES.map((size)=>(
-                    <button className=' w-20 h-15  rounded-md border-1 border-dark-500'>{size}</button>
+                SIZES.map((size,idx)=>(
+                    <button key={idx} className=' w-20 h-15  rounded-md border-1 border-dark-500'>{size}</button>
                 ))
             }
         </div>
