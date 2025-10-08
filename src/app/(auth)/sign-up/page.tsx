@@ -4,5 +4,6 @@ import React from 'react'
 export default function page() {
   return (
     <AuthForm mode="sign-up" onSubmit={()=>{}}/>
+    
   )
 }
