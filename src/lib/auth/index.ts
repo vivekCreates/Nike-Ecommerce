@@ -1,21 +1,34 @@
-import { betterAuth, uuidv4 } from "better-auth";
+import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db } from "../db";
-import { usersTable } from "../db/schema/user";
-import { nextCookies } from "better-auth/next-js";
+import { db } from "@/lib/db";
+import * as schema from "@/lib/db/schema/index";
+import { v4 as uuidv4 } from "uuid";
+import {nextCookies} from "better-auth/next-js";
 
 export const auth = betterAuth({
-    database: drizzleAdapter(db, {
-        provider: "pg",
-        schema:{
-            user:usersTable
-        }
-    }),
-    emailAndPassword: {
+  database: drizzleAdapter(db, {
+    provider: "pg",
+    schema: {
+      user: schema.users,
+      session: schema.sessions,
+      account: schema.accounts,
+      verification: schema.verifications,
+    },
+  }),
+  emailAndPassword: {
     enabled: true,
     requireEmailVerification: false,
   },
-  socialProviders: {},
+   socialProviders: {
+        google: { 
+            clientId: process.env.GOOGLE_CLIENT_ID as string, 
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string, 
+        }, 
+        github:{
+            clientId: process.env.GITHUB_CLIENT_ID as string,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+        }
+    },
   sessions: {
     cookieCache: {
       enabled: true,
@@ -36,9 +49,8 @@ export const auth = betterAuth({
   },
   advanced: {
     database: {
-      generateId: () => uuidv4().toString()
+      generateId: () => uuidv4()
     }
   },
   plugins: [nextCookies()]
-
 });

@@ -1,10 +1,36 @@
+'use client';
+
 import Link from 'next/link'
 import React from 'react'
 import { Button } from './ui/button'
 import { Label } from './ui/label'
 import { Input } from './ui/input'
+import { useRouter } from 'next/navigation';
 
-export default function AuthForm({ mode, onSubmit }: { mode: string, onSubmit: () => void }) {
+
+type Props = {
+  mode: "sign-in" | "sign-up";
+  onSubmit: (formData: FormData) => Promise<{ ok: boolean; userId?: string } | void>;
+};
+
+export default function AuthForm({ mode, onSubmit }:Props) {
+
+
+    const router = useRouter()
+
+    const handleSubmit = async(form:FormData)=> {
+        try {
+            const res = await onSubmit(form)
+            console.log(res)
+            if(!res){
+                alert("signUP failed")
+            }
+            router.push("/")
+        } catch (error:any) {
+            alert(error?.message)
+        }
+    }
+
     return (
         <div className='w-full h-screen mx-auto py-10 px-40 text-dark-900'>
 
@@ -38,25 +64,25 @@ export default function AuthForm({ mode, onSubmit }: { mode: string, onSubmit: (
                         <span className='text-dark-700'>{mode == "sign-in" ? "Or sign in with" : "Or sign up with"}</span>
                         <div className='h-[.5px] w-1/3 bg-dark-500'></div>
                     </div>
-                    <form action="" className='flex flex-col gap-6 text-lg'>
+                    <form action={handleSubmit} className='flex flex-col gap-6 text-lg'>
                         {
                             mode == "sign-up" && (
                                 <div className='flex flex-col gap-1'>
                                     <Label htmlFor="username" className='text-sm'>Username</Label>
-                                    <Input placeholder='Enter the Username' className='py-6 rounded-md' />
+                                    <Input placeholder='Enter the Username' name='name' className='py-6 rounded-md' />
                                 </div>
                             )
                         }
 
                         <div className='flex flex-col gap-1'>
                             <Label htmlFor="email" className='text-sm'>Email</Label>
-                            <Input placeholder='Enter the Email' className='py-6 rounded-md' />
+                            <Input placeholder='Enter the Email' name='email' className='py-6 rounded-md' />
                         </div>
                         <div className='flex flex-col gap-1'>
                             <Label htmlFor="password" className='text-sm'>Password</Label>
-                            <Input placeholder='Enter the Password' className='py-6 rounded-md' />
+                            <Input placeholder='Enter the Password' name='password' className='py-6 rounded-md' />
                         </div>
-                        <Button className='w-full py-8 rounded-full'>{mode == "sign-in" ? "signIn" : "signUp"}</Button>
+                        <Button type='submit' className='w-full py-8 rounded-full'>{mode == "sign-in" ? "signIn" : "signUp"}</Button>
                     </form>
                     <p className='text-dark-700'>By signing up, you agree to our Terms of Service and Privacy Policy</p>
                 </div>
