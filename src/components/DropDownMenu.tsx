@@ -1,11 +1,24 @@
+'use client';
+import { signOut } from '@/lib/auth/action'
 import { NAV_ITEMS } from '@/lib/contants'
 import { firstLetterOfName } from '@/lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
 import Link from 'next/link'
-import React from 'react'
+import { useRouter } from 'next/navigation'
+import React, { startTransition } from 'react'
 
 export default function DropDownMenu() {
+
+  const router = useRouter()
+
+  const handleLogout = () => {
+  startTransition(async () => {
+    await signOut();
+    router.refresh(); 
+    router.push("/sign-in");
+  });
+}
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -31,10 +44,10 @@ export default function DropDownMenu() {
             </DropdownMenuItem>
           </Link>
         ))}
-        <DropdownMenuItem className="hover:bg-light-300 outline-none w-36 py-1 rounded-md flex cursor-pointer justify-center text-red-500">
+        <DropdownMenuItem onClick={handleLogout} className="hover:bg-light-300 outline-none w-36 py-1 rounded-md flex cursor-pointer justify-center text-red-500">
           Logout
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+)
 }
