@@ -60,12 +60,14 @@ export const signIn = async (formData: FormData) => {
   }
   try {
     const data = signInSchema.parse(rawData)
+
     const res = await auth.api.signInEmail({
       body: {
         email: data.email,
         password: data.password
       }
     })
+    
     return { ok: true, userId: res?.user.id }
   } catch (error) {
     if (error instanceof z.ZodError) {

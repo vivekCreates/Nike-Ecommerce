@@ -7,6 +7,7 @@ import TrendingProducts from '@/components/TrendingProducts'
 import React from 'react'
 
 export default function page() {
+  
   return (
     <div>
       <Hero/>
