@@ -1,5 +1,5 @@
 {
-  "id": "d0897ade-0e84-4f9a-92af-0868de8356d8",
+  "id": "284c3e3e-4668-4d6d-919b-265df8ff326d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -590,6 +590,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "price": {
+          "name": "price",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
         "category_id": {
           "name": "category_id",
           "type": "uuid",
@@ -632,10 +638,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "products_category_id_users_id_fk": {
-          "name": "products_category_id_users_id_fk",
+        "products_category_id_categories_id_fk": {
+          "name": "products_category_id_categories_id_fk",
           "tableFrom": "products",
-          "tableTo": "users",
+          "tableTo": "categories",
           "columnsFrom": [
             "category_id"
           ],

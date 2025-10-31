@@ -22,3 +22,18 @@ export type GenderType = ShoeType & {
 }
 
 export type BrandType = ShoeType & {};
+
+
+export type ProductType = {
+    id:string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    gender: string;
+    brands: string;
+    isPublished: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+}

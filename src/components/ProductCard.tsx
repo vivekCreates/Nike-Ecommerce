@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-export default function ProductCard({id,name,price,imageUrl}:{id:number,name:string,imageUrl:string,price:number}) {
+export default function ProductCard({id,name,price,image}:{id:string,name:string,image:string,price:number}) {
   const router = useRouter();
 
 
@@ -19,7 +19,7 @@ export default function ProductCard({id,name,price,imageUrl}:{id:number,name:str
       
       <div className="group overflow-hidden aspect-square bg-gray-50 flex items-center justify-center">
         <Image 
-          src={imageUrl} 
+          src={image} 
           alt={name} 
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           width={200}

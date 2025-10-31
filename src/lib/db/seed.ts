@@ -99,14 +99,17 @@ async function seed() {
       "Nike Metcon 9",
       "Nike Air Max Dn",
     ];
+    const prices = [99,109,119,129,139,149,159,169,179,189,199,209,219,229,239,249,259,269,279,289,];
 
     for (const name of productNames) {
       const productId = uuidv4();
       const gender = allGenders[Math.floor(Math.random() * allGenders.length)];
+      const price = prices[Math.floor(Math.random() * prices.length)];
 
       const product = {
         id: productId,
         name,
+        price,
         description: `${name} - comfortable and stylish.`,
         categoryId: shoesCat.id,
         genderId: gender.id,
@@ -153,3 +156,5 @@ async function seed() {
 }
 
 seed();
+
+
