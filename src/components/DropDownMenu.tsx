@@ -1,7 +1,7 @@
 'use client';
 import { signOut } from '@/lib/auth/action'
 import { NAV_ITEMS } from '@/lib/contants'
-import { firstLetterOfName } from '@/lib/utils'
+import { firstLetterOfName } from '@/lib/utils/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
 import Link from 'next/link'
