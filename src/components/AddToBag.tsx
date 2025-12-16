@@ -13,7 +13,6 @@ function AddToBag({product}:{product:ProductType}) {
    <Button className="py-7 rounded-full cursor-pointer" onClick={()=>{
     addToCart(product)
     router.push("/cart")
-    console.log("items: ",items)
 }
 }>Add to Bag</Button>
   )

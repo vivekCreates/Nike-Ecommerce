@@ -4,9 +4,8 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-export default function ProductCard({id,name,price,image}:{id?:string,name:string,image:string,price:number}) {
+export default function ProductCard({id,name,price,image}:{id:string,name:string,image:string,price:number}) {
   const router = useRouter();
-  console.log("id: ",id)
 
   return (
     <div 

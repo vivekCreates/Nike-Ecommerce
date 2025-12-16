@@ -58,6 +58,8 @@ export const signIn = async (formData: FormData) => {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
   }
+
+  console.log("rawData: ",rawData);
   try {
     const data = signInSchema.parse(rawData)
 
@@ -67,7 +69,7 @@ export const signIn = async (formData: FormData) => {
         password: data.password
       }
     })
-    
+    console.log("resact: ",res)
     return { ok: true, userId: res?.user.id }
   } catch (error) {
     if (error instanceof z.ZodError) {

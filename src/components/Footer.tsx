@@ -1,5 +1,5 @@
 import React from 'react';
-import { Twitter , Facebook, Instagram, MapPin } from 'lucide-react';
+import { Twitter, Facebook, Instagram, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -20,10 +20,6 @@ export default function Footer() {
     {
       title: 'Women',
       links: ['React Presto 1', 'React Presto 2', 'React Presto 3', 'React Presto 4']
-    },
-    {
-      title: "Kids'",
-      links: ['Infant & Toddler Shoes', "Kids' Shoes", "Kids' Jordan Shoes", "Kids' Basketball Shoes"]
     }
   ];
 
@@ -37,14 +33,14 @@ export default function Footer() {
   return (
     <footer className="bg-black text-white">
       <div className="w-full px-10 sm:px-6 lg:px-8 py-8 sm:py-10">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 lg:gap-12 mb-12 sm:mb-16">  
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 lg:gap-12 mb-12 sm:mb-16">
           <div className="md:flex items-start lg:col-span-1 hidden">
             <div className="w-16 h-full  sm:w-20 sm:h-20 flex items-center">
               <Image src={"/logo.svg"} width={100} height={100} alt='logo' />
             </div>
           </div>
 
- {footerSections.map((section, index) => (
+          {footerSections.map((section, index) => (
             <div key={index}>
               <h3 className="font-bold text-base sm:text-lg  mb-4 sm:mb-6">
                 {section.title}
@@ -64,7 +60,7 @@ export default function Footer() {
             </div>
           ))}
 
-</div>
+        </div>
         <div className="flex justify-end lg:hidden mb-8">
           <div className="flex space-x-3">
             <Link

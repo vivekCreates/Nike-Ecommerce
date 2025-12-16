@@ -35,10 +35,7 @@ export default function page() {
                     }
                 </ul>
                 <div className='flex flex-col gap-2'>
-                    <CartItem/>
-                    <CartItem/>
-                    <CartItem/>
-                    <CartItem/>
+                   
                 </div>
             </div>
         </div>

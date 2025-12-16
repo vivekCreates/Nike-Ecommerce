@@ -10,9 +10,13 @@ import { authClient } from '@/lib/auth/auth-client';
 import Spinner from './Spinner';
 
 
+type SubmitResult =
+  | { ok: true; userId?: string }
+  | { ok: false; errors: string[] };
+
 type Props = {
   mode: "sign-in" | "sign-up";
-  onSubmit: (formData: FormData) => Promise<{ ok: boolean; userId?: string } | void>;
+  onSubmit: (formData: FormData) => Promise<SubmitResult>;
 };
 
 export default function AuthForm({ mode, onSubmit }: Props) {
@@ -30,9 +34,8 @@ export default function AuthForm({ mode, onSubmit }: Props) {
         try {
             const form = new FormData(e.currentTarget)
             const res = await onSubmit(form)
-            console.log("res: ",res)
             if (!res?.ok) {
-                setErrors(res?.errors)
+                setErrors({errors:["User not found"]})
             } else {
                 router.push("/")
             }

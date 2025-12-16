@@ -1,9 +1,12 @@
-import { type CartItem } from '@/app/store/cart';
+import { useCartStore, type CartItem } from '@/app/store/cart';
 import { ProductType } from '@/lib/types';
 import Image from 'next/image';
 import React from 'react';
+import { Button } from './ui/button';
 
 export default function CartItem({product}:{product:CartItem}) {
+
+    const {increaseQty,decreaseQty,removeFromCart} = useCartStore();
     return (
         <div className="bg-white w-full py-4 px-4 sm:py-5 sm:px-5 max-w-2xl">
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
@@ -38,18 +41,23 @@ export default function CartItem({product}:{product:CartItem}) {
                         </div>
 
                         <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-3 xs:gap-4">
-                            <div className="flex gap-4 sm:gap-5 text-sm">
-                                <div>
+                            <div className="flex gap-2 sm:gap-5 text-sm">
+                                {/* <div>
                                     <span className="text-gray-600">Size </span>
                                     <span className="font-medium text-gray-900">10</span>
-                                </div>
+                                </div> */}
                                 <div>
                                     <span className="text-gray-600">Quantity </span>
+                                    <div className='flex gap-4 items-center mt-2'>
+                                    <Button className='py-1 px-2 ' variant={"outline"} onClick={()=>decreaseQty(product.id)}>-</Button>
                                     <span className="font-medium text-gray-900">{product.quantity}</span>
+                                    <Button className='py-1 px-2 ' variant={"outline"} onClick={()=>increaseQty(product.id)}>+</Button>
+                                    </div>
                                 </div>
                             </div>
 
-                            <button className="flex items-center gap-2 text-red-600 text-sm font-medium hover:text-red-700 transition-colors self-start xs:self-auto">
+                            <button className="flex items-center gap-2 text-red-600 text-sm font-medium hover:text-red-700 transition-colors self-start xs:self-auto"
+                            onClick={()=>removeFromCart(product.id) }>
                                 <svg
                                     className="w-4 h-4"
                                     fill="none"
@@ -64,7 +72,7 @@ export default function CartItem({product}:{product:CartItem}) {
                                     />
                                 </svg>
                                 <span className="hidden xs:inline">Cancel Order</span>
-                                <span className="xs:hidden">Cancel</span>
+                                <span className="xs:hidden cursor-pointer" >Cancel</span>
                             </button>
                         </div>
                     </div>

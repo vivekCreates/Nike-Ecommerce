@@ -4,41 +4,34 @@ import { brands, categories, genders, productImages, products, sizes } from "../
 
 
 
+ type Filters = {
+  gender?: string | string[];
+  sports?: string | string[];
+  price?: string | string[];
+};
 
- async function getAllProducts({
-  gender,
-  sports,
-  price,
-}: {
-  gender?: string | string[] | undefined;
-  sports?: string | string[] | undefined;
-  price?: string | string[] | undefined;
-}) {
+async function getAllProducts({ gender, sports, price }: Filters = {}) {
   try {
-    const filters: any[] = [];
+    const filters = [];
 
-    // ✅ Handle gender
     if (gender) {
-      const genderArr = Array.isArray(gender) ? gender : [gender];
-      filters.push(inArray(genders.slug, genderArr));
+      filters.push(
+        inArray(genders.slug, Array.isArray(gender) ? gender : [gender])
+      );
     }
 
-    // ✅ Handle category
     if (sports) {
-      const categoryArr = Array.isArray(sports) ? sports : [sports];
-      filters.push(inArray(categories.slug, categoryArr));
+      filters.push(
+        inArray(categories.slug, Array.isArray(sports) ? sports : [sports])
+      );
     }
 
-    console.log("category: ",sports)
-
-    // ✅ Handle price (assume max price filter)
     if (price) {
-      const priceValue = Array.isArray(price) ? Number(price[0]) : Number(price);
-      if (!isNaN(priceValue)) filters.push(lte(products.price, priceValue));
+      const value = Number(Array.isArray(price) ? price[0] : price);
+      if (!isNaN(value)) filters.push(lte(products.price, value));
     }
 
-    // ✅ Final query
-    const productsList = await db
+    return await db
       .select({
         id: products.id,
         name: products.name,
@@ -58,16 +51,22 @@ import { brands, categories, genders, productImages, products, sizes } from "../
       .leftJoin(genders, eq(products.genderId, genders.id))
       .leftJoin(brands, eq(products.brandId, brands.id))
       .where(filters.length ? and(...filters) : undefined);
-
-      console.log("productsList: ",productsList);
-
-    return productsList;
   } catch (error: any) {
     console.error("Error fetching products:", error.message);
     return [];
   }
 }
 
+
+async function getProducts(){
+  try {
+    const allProducts = await db.select().from(products);
+    console.log(allProducts);
+    return allProducts;
+  } catch (error) {
+    console.log('error: ',error);
+  }
+}
 
 
 async function getProductById(id: string) {
@@ -104,4 +103,4 @@ async function getProductById(id: string) {
     }   
 }
 
-export { getAllProducts, getProductById };
+export { getAllProducts,getProducts, getProductById };

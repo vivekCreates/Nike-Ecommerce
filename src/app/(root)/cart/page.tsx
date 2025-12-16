@@ -3,60 +3,11 @@
 import { useCartStore } from "@/app/store/cart";
 import CartItem from "@/components/CartItem";
 import Link from "next/link";
-import { useState } from "react";
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Premium Wireless Headphones",
-      description: "Noise cancelling, 30hr battery",
-      price: 199,
-      quantity: 1,
-      size: "One Size",
-      color: "Black",
-      image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop"
-    },
-    {
-      id: 2,
-      name: "Smart Fitness Watch",
-      description: "Heart rate monitor, GPS tracking",
-      price: 299,
-      quantity: 2,
-      size: "Medium",
-      color: "Silver",
-      image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop"
-    },
-    {
-      id: 3,
-      name: "Leather Backpack",
-      description: "15-inch laptop compartment",
-      price: 149,
-      quantity: 1,
-      size: "Large",
-      color: "Brown",
-      image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop"
-    }
-  ]);
 
-  const {items} = useCartStore();
+  const {items,totalPrice} = useCartStore();
 
-  const handleUpdateQuantity = (id:number, newQuantity:number) => {
-    if (newQuantity < 1) return;
-    setCartItems(items =>
-      items.map(item =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
-
-  const handleRemove = (id:number) => {
-    setCartItems(items => items.filter(item => item.id !== id));
-  };
-
-  const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const deliveryFee = 30;
-  const total = subtotal + deliveryFee;
 
   return (
     <div className="w-full min-h-screen">
@@ -79,6 +30,7 @@ export default function CartPage() {
                 <div>
                   {items.map(item => (
                     <CartItem 
+                    key={item.id}
                     product = {item}
                     />
                   ))}
@@ -90,19 +42,19 @@ export default function CartPage() {
                 <h2 className="text-xl sm:text-2xl font-bold mb-6">Order Summary</h2>
                 
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between text-gray-700">
+                  {/* <div className="flex items-center justify-between text-gray-700">
                     <span>Subtotal</span>
                     <span className="font-semibold">${subtotal.toFixed(2)}</span>
-                  </div>
+                  </div> */}
                   
-                  <div className="flex items-center justify-between text-gray-700">
+                  {/* <div className="flex items-center justify-between text-gray-700">
                     <span className="text-sm">Estimated Delivery & Handling</span>
                     <span className="font-semibold">${deliveryFee.toFixed(2)}</span>
-                  </div>
+                  </div> */}
                   
                   <div className="flex items-center justify-between pt-4 border-t border-gray-200">
                     <span className="font-bold text-lg">Total</span>
-                    <span className="font-bold text-lg">${total.toFixed(2)}</span>
+                    <span className="font-bold text-lg">${totalPrice()}</span>
                   </div>
                 </div>
                 

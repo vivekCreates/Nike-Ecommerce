@@ -14,7 +14,6 @@ import AddToBag from "@/components/AddToBag";
 export default async function Page({ params }: { params: { slug: string } }) {
   const {slug} = await params;
   const product = await getProductById(slug) as ProductType;
-  console.log("product: ",product);
 
   return (
     <>
@@ -28,8 +27,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
 {
           <figure className="relative w-full lg:w-[28rem] h-[34rem] rounded-md overflow-hidden flex justify-center items-center">
             <Image
-              src={product?.image}
-              alt={product?.name}
+              src={product.image}
+              alt={product.name}
               width={600}
               height={600}
               className="w-full h-full object-cover object-center"

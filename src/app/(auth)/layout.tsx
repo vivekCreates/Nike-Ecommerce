@@ -5,7 +5,9 @@ import Image from 'next/image'
 export default function layout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en">
+           
             <body
+             cz-shortcut-listen="true"
             >
                 <div className='w-full h-screen flex text-white items-center justify-center'>
                     <div className='w-[50%] h-full hidden md:flex bg-black p-10  flex-col justify-between'>
