@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 export default function TrendingProducts() {
@@ -67,7 +68,7 @@ export default function TrendingProducts() {
                   {products[0].subtitle}
                 </p>
                 <button className="bg-white text-gray-900 px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-base hover:bg-gray-100 transition-colors w-fit">
-                  Shop Now
+                  <Link href={"/shoes"}>Shop</Link>
                 </button>
               </div>
             </div>

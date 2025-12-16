@@ -1,5 +1,6 @@
 'use client';
 
+import { useCartStore } from "@/app/store/cart";
 import CartItem from "@/components/CartItem";
 import Link from "next/link";
 import { useState } from "react";
@@ -38,6 +39,8 @@ export default function CartPage() {
     }
   ]);
 
+  const {items} = useCartStore();
+
   const handleUpdateQuantity = (id:number, newQuantity:number) => {
     if (newQuantity < 1) return;
     setCartItems(items =>
@@ -58,12 +61,12 @@ export default function CartPage() {
   return (
     <div className="w-full min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
-        {cartItems.length === 0 ? (
+        {items.length === 0 ? (
           <div className="text-center py-20">
             <h2 className="text-2xl font-semibold mb-4">Your cart is empty</h2>
             <p className="text-gray-600 mb-6">Add some items to get started!</p>
             <button className="px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors">
-              Continue Shopping
+              <Link href={"/shoes"}>Continue Shopping</Link>
             </button>
           </div>
         ) : (
@@ -71,11 +74,12 @@ export default function CartPage() {
             <div className="flex-1 lg:w-[70%]">
               <div className="bg-white rounded-lg overflow-hidden">
                 <div className="px-4 sm:px-6 py-4 border-b border-gray-200">
-                  <h1 className="text-2xl sm:text-3xl font-bold">Cart({cartItems.length})</h1>
+                  <h1 className="text-2xl sm:text-3xl font-bold">Cart({items.length})</h1>
                 </div>
                 <div>
-                  {cartItems.map(item => (
+                  {items.map(item => (
                     <CartItem 
+                    product = {item}
                     />
                   ))}
                 </div>

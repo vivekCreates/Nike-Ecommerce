@@ -9,7 +9,7 @@ export default function ProductSection() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 flex-wrap">
             {
               products.map(({id,name,price,imageUrl})=>(
-                <ProductCard key={id} id={id} name={name} price={price} imageUrl={imageUrl}/>
+                <ProductCard key={id} id={id} name={name} price={price} image={imageUrl}/>
               ))
             }
         </div>

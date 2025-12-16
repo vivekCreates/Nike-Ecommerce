@@ -107,7 +107,7 @@ export default function FilterSection() {
           )}
         </div>
 
-        <div className="border-t border-gray-200 py-4">
+        {/* <div className="border-t border-gray-200 py-4">
           <button
             onClick={() => toggleSection('kids')}
             className="flex items-center justify-between w-full mb-3"
@@ -130,7 +130,7 @@ export default function FilterSection() {
               ))}
             </div>
           )}
-        </div>
+        </div> */}
 
         <div className="border-t border-gray-200 py-4">
           <button

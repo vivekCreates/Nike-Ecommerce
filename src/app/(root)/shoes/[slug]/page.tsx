@@ -9,11 +9,12 @@ import { products, SHOES } from "@/lib/contants";
 import Image from "next/image";
 import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Heart } from "lucide-react";
 import { ProductType } from "@/lib/types";
+import AddToBag from "@/components/AddToBag";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const {slug} = await params;
   const product = await getProductById(slug) as ProductType;
-  console.log(product);
+  console.log("product: ",product);
 
   return (
     <>
@@ -46,7 +47,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <ShoeSizes />
 
             <div className="flex flex-col gap-4 py-4">
-              <Button className="py-7 rounded-full">Add to Bag</Button>
+              <AddToBag product={product}/>
               <Button className="py-7 rounded-full border-1 border-black" variant="outline">
                 <Heart /> Favourite
               </Button>

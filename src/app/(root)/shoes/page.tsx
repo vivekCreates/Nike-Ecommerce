@@ -3,9 +3,20 @@ import ProductCard from '@/components/ProductCard'
 import { getAllProducts } from '@/lib/actions/products'
 import React from 'react'
 
-export default async function page () {
-   const products = await getAllProducts();
-   console.log(products)
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: {
+    sports?: string;
+    gender?: string;
+    price?: string;
+  };
+}) {
+  const { sports, gender, price } = await searchParams;
+
+   
+   const products = await getAllProducts({gender,sports,price});
+   console.log("products: ",products)
   return (
     <div className='min-h-screen w-full'>
         <div className='flex w-full'>
