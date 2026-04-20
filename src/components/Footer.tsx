@@ -2,24 +2,53 @@ import React from 'react';
 import { Twitter, Facebook, Instagram, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getAllProducts } from '@/lib/actions/products';
 
-export default function Footer() {
+export default async function Footer() {
+  const products = await getAllProducts();
+
+  // Group products by category for footer sections
+  const featuredProducts = products.filter(p => ['Nike Air Force 1', 'Nike Air Max 90', 'Nike Air Max 97', 'Nike Air Max 270'].includes(p.name)).slice(0, 4);
+  const shoesProducts = products.filter(p => p.category === 'Shoes').slice(0, 4);
+  const menProducts = products.filter(p => p.gender === 'Men').slice(0, 4);
+  const womenProducts = products.filter(p => p.gender === 'Women').slice(0, 4);
+
   const footerSections = [
     {
       title: 'Featured',
-      links: ['Air Force 1', 'Huarache', 'Air Max 90', 'Air Max 95']
+      links: featuredProducts.length > 0 ? featuredProducts.map(p => ({ name: p.name, id: p.id })) : [
+        { name: 'Air Force 1', id: 'default1' },
+        { name: 'Air Max 90', id: 'default2' },
+        { name: 'Air Max 97', id: 'default3' },
+        { name: 'Air Max 270', id: 'default4' }
+      ]
     },
     {
       title: 'Shoes',
-      links: ['All Shoes', 'Custom Shoes', 'Jordan Shoes', 'Running Shoes']
+      links: shoesProducts.length > 0 ? shoesProducts.map(p => ({ name: p.name, id: p.id })) : [
+        { name: 'All Shoes', id: 'default5' },
+        { name: 'Custom Shoes', id: 'default6' },
+        { name: 'Jordan Shoes', id: 'default7' },
+        { name: 'Running Shoes', id: 'default8' }
+      ]
     },
     {
       title: 'Men',
-      links: ['Air Max 1', 'Air Max 2', 'Air Max 3', 'Air Max 4']
+      links: menProducts.length > 0 ? menProducts.map(p => ({ name: p.name, id: p.id })) : [
+        { name: 'Air Max 1', id: 'default9' },
+        { name: 'Air Max 2', id: 'default10' },
+        { name: 'Air Max 3', id: 'default11' },
+        { name: 'Air Max 4', id: 'default12' }
+      ]
     },
     {
       title: 'Women',
-      links: ['React Presto 1', 'React Presto 2', 'React Presto 3', 'React Presto 4']
+      links: womenProducts.length > 0 ? womenProducts.map(p => ({ name: p.name, id: p.id })) : [
+        { name: 'React Presto 1', id: 'default13' },
+        { name: 'React Presto 2', id: 'default14' },
+        { name: 'React Presto 3', id: 'default15' },
+        { name: 'React Presto 4', id: 'default16' }
+      ]
     }
   ];
 
@@ -49,10 +78,10 @@ export default function Footer() {
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
                     <Link
-                      href="#"
+                      href={link.id.startsWith('default') ? '#' : `/shoes/${link.id}`}
                       className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base block"
                     >
-                      {link}
+                      {link.name}
                     </Link>
                   </li>
                 ))}
@@ -95,6 +124,10 @@ export default function Footer() {
                 <MapPin size={16} />
                 <span>Croatia</span>
               </div>
+              <span className="hidden sm:inline">•</span>
+              <Link href="https://www.nike.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                nike.com
+              </Link>
               <span className="hidden sm:inline">•</span>
               <span className="w-full sm:w-auto">© 2025 Nike, Inc. All Rights Reserved</span>
             </div>

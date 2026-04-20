@@ -1,10 +1,20 @@
-import { and, eq, inArray, lte } from "drizzle-orm";
+import { and, eq, inArray, lte, gte, or } from "drizzle-orm";
 import { db } from "../db";
 import { brands, categories, genders, productImages, products, sizes } from "../db/schema";
 
+type PriceRange = {
+  min: number;
+  max: number;
+};
 
+const PRICE_RANGES: { [key: string]: PriceRange } = {
+  "under-50": { min: 0, max: 50 },
+  "50-100": { min: 50, max: 100 },
+  "100-150": { min: 100, max: 150 },
+  "over-150": { min: 150, max: Infinity },
+};
 
- type Filters = {
+type Filters = {
   gender?: string | string[];
   sports?: string | string[];
   price?: string | string[];
@@ -12,26 +22,48 @@ import { brands, categories, genders, productImages, products, sizes } from "../
 
 async function getAllProducts({ gender, sports, price }: Filters = {}) {
   try {
-    const filters = [];
+    const filters: any[] = [];
 
+    // Only filter by gender if gender is provided
     if (gender) {
+      const genderValues = Array.isArray(gender) ? gender : [gender];
       filters.push(
-        inArray(genders.slug, Array.isArray(gender) ? gender : [gender])
+        inArray(genders.slug, genderValues)
       );
     }
 
+    // Only filter by category/sports if sports is provided
     if (sports) {
+      const sportsValues = Array.isArray(sports) ? sports : [sports];
       filters.push(
-        inArray(categories.slug, Array.isArray(sports) ? sports : [sports])
+        inArray(categories.slug, sportsValues)
       );
     }
 
+    // Price filter
     if (price) {
-      const value = Number(Array.isArray(price) ? price[0] : price);
-      if (!isNaN(value)) filters.push(lte(products.price, value));
+      const priceValues = Array.isArray(price) ? price : [price];
+      const priceFilters = priceValues
+        .map((p) => {
+          const range = PRICE_RANGES[p];
+          if (!range) return null;
+          if (range.max === Infinity) {
+            return gte(products.price, range.min);
+          }
+          return and(gte(products.price, range.min), lte(products.price, range.max));
+        })
+        .filter((p): p is any => p !== null);
+
+      if (priceFilters.length > 0) {
+        filters.push(or(...priceFilters));
+      }
     }
 
-    return await db
+    // Build the where clause
+    const whereClause = filters.length > 0 ? and(...filters) : undefined;
+
+    // Get all products with their first image
+    const allProducts = await db
       .select({
         id: products.id,
         name: products.name,
@@ -50,7 +82,12 @@ async function getAllProducts({ gender, sports, price }: Filters = {}) {
       .leftJoin(categories, eq(products.categoryId, categories.id))
       .leftJoin(genders, eq(products.genderId, genders.id))
       .leftJoin(brands, eq(products.brandId, brands.id))
-      .where(filters.length ? and(...filters) : undefined);
+      .where(whereClause);
+
+    return allProducts.map(p => ({
+      ...p,
+      image: p.image || "/shoes/shoe-1.jpg",
+    }));
   } catch (error: any) {
     console.error("Error fetching products:", error.message);
     return [];
@@ -97,7 +134,10 @@ async function getProductById(id: string) {
             return { success: false, message: "Product not found" };
         }   
         console.log(product);
-        return product[0];
+        return product[0] ? {
+          ...product[0],
+          image: product[0].image || "/shoes/shoe-1.jpg"
+        } : null;
     } catch (error:any) {
         return { success: false, message: error?.message || "An error occurred" };
     }   

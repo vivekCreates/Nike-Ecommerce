@@ -29,7 +29,7 @@ export default function FilterSection() {
   };
 
   const handleFilterChange = (category: string, value: string) => {
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(searchParams.toString());
     const values = params.getAll(category);
 
     if (values.includes(value)) {
@@ -45,6 +45,14 @@ export default function FilterSection() {
     router.push(`?${params.toString()}`);
   };
 
+  const activeFiltersCount = () => {
+    let count = 0;
+    searchParams.forEach((value) => {
+      if (value) count++;
+    });
+    return count;
+  };
+
   return (
     <>
       <div className="lg:hidden p-4 ">
@@ -52,7 +60,7 @@ export default function FilterSection() {
           onClick={() => setMobileOpen(true)}
           className="flex items-center gap-2 px-2 py-2 sm:px-4 border rounded-lg text-sm font-medium"
         >
-          <Filter size={18} /> Filters
+          <Filter size={18} /> Filters {activeFiltersCount() > 0 && `(${activeFiltersCount()})`}
         </button>
       </div>
 
@@ -69,17 +77,6 @@ export default function FilterSection() {
           <button onClick={() => setMobileOpen(false)} className="text-gray-500">
             ✕
           </button>
-        </div>
-
-        <div className='py-5'>
-          <h2 className='text-heading-3 mb-4 font-semibold'>New(500)</h2>
-          <ul className='flex flex-col gap-2'>
-          {
-            ["Low Top","High Top","Skateboarding","Nike By You"].map((opt)=>(
-              <li key={opt} className='text-sm'>{opt}</li>
-            ))
-          }
-          </ul>
         </div>
 
         <div className="border-t border-gray-200 py-4">
@@ -107,31 +104,6 @@ export default function FilterSection() {
           )}
         </div>
 
-        {/* <div className="border-t border-gray-200 py-4">
-          <button
-            onClick={() => toggleSection('kids')}
-            className="flex items-center justify-between w-full mb-3"
-          >
-            <span className="font-semibold">Kids</span>
-            {expandedSections.kids ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-          </button>
-          {expandedSections.kids && (
-            <div className="space-y-2">
-              {['boys', 'girls'].map((option) => (
-                <label key={option} className="flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={getSelectedValues('kids').includes(option)}
-                    onChange={() => handleFilterChange('kids', option)}
-                    className="w-4 h-4 rounded border-gray-300"
-                  />
-                  <span className="ml-2 text-sm capitalize">{option}</span>
-                </label>
-              ))}
-            </div>
-          )}
-        </div> */}
-
         <div className="border-t border-gray-200 py-4">
           <button
             onClick={() => toggleSection('price')}
@@ -142,40 +114,20 @@ export default function FilterSection() {
           </button>
           {expandedSections.price && (
             <div className="space-y-2">
-              {['$25 - $50', '$50 - $100', '$100 - $150', 'Over $150'].map((option) => (
-                <label key={option} className="flex items-center cursor-pointer">
+              {[
+                { key: 'under-50', label: '$0 - $50' },
+                { key: '50-100', label: '$50 - $100' },
+                { key: '100-150', label: '$100 - $150' },
+                { key: 'over-150', label: 'Over $150' },
+              ].map(({ key, label }) => (
+                <label key={key} className="flex items-center cursor-pointer">
                   <input
                     type="checkbox"
-                    checked={getSelectedValues('price').includes(option)}
-                    onChange={() => handleFilterChange('price', option)}
+                    checked={getSelectedValues('price').includes(key)}
+                    onChange={() => handleFilterChange('price', key)}
                     className="w-4 h-4 rounded border-gray-300"
                   />
-                  <span className="ml-2 text-sm">{option}</span>
-                </label>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <div className="border-t border-gray-200 py-4">
-          <button
-            onClick={() => toggleSection('height')}
-            className="flex items-center justify-between w-full mb-3"
-          >
-            <span className="font-semibold">Shoe Height</span>
-            {expandedSections.height ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-          </button>
-          {expandedSections.height && (
-            <div className="space-y-2">
-              {['low-top', 'mid-top', 'high-top'].map((option) => (
-                <label key={option} className="flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={getSelectedValues('height').includes(option)}
-                    onChange={() => handleFilterChange('height', option)}
-                    className="w-4 h-4 rounded border-gray-300"
-                  />
-                  <span className="ml-2 text-sm capitalize">{option}</span>
+                  <span className="ml-2 text-sm">{label}</span>
                 </label>
               ))}
             </div>
@@ -187,24 +139,41 @@ export default function FilterSection() {
             onClick={() => toggleSection('sports')}
             className="flex items-center justify-between w-full mb-3"
           >
-            <span className="font-semibold">Sports</span>
+            <span className="font-semibold">Category</span>
             {expandedSections.sports ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
           </button>
           {expandedSections.sports && (
             <div className="space-y-2">
-              {['lifestyle', 'skateboarding', 'dance'].map((option) => (
-                <label key={option} className="flex items-center cursor-pointer">
+              {[
+                { key: 'shoes', label: 'Shoes' },
+                { key: 'running-shoes', label: 'Running Shoes' },
+                { key: 'lifestyle', label: 'Lifestyle' },
+              ].map(({ key, label }) => (
+                <label key={key} className="flex items-center cursor-pointer">
                   <input
                     type="checkbox"
-                    checked={getSelectedValues('sports').includes(option)}
-                    onChange={() => handleFilterChange('sports', option)}
+                    checked={getSelectedValues('sports').includes(key)}
+                    onChange={() => handleFilterChange('sports', key)}
                     className="w-4 h-4 rounded border-gray-300"
                   />
-                  <span className="ml-2 text-sm capitalize">{option}</span>
+                  <span className="ml-2 text-sm">{label}</span>
                 </label>
               ))}
             </div>
           )}
+        </div>
+
+        <div className="border-t border-gray-200 py-6">
+          <button
+            onClick={() => {
+              const params = new URLSearchParams();
+              router.push('?');
+              setMobileOpen(false);
+            }}
+            className="w-full px-4 py-2 bg-gray-100 text-gray-900 rounded hover:bg-gray-200 transition-colors text-sm font-medium"
+          >
+            Clear Filters
+          </button>
         </div>
       </aside>
 

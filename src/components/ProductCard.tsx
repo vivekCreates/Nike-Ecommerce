@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-export default function ProductCard({id,name,price,image}:{id:string,name:string,image:string,price:number}) {
+export default function ProductCard({id,name,price,image,isBestSeller=false}:{id:string,name:string,image:string,price:number,isBestSeller?:boolean}) {
   const router = useRouter();
 
   return (
@@ -12,9 +12,11 @@ export default function ProductCard({id,name,price,image}:{id:string,name:string
     className="h-auto relative  bg-white overflow-hidden font-sans"
     onClick={()=>router.push(`/shoes/${id}`)}
     >
-      <div className="absolute top-5 left-5 z-20">
-        <span className="text-red text-xs bg-white  px-4 py-2 rounded-full font-semibold">Best Seller</span>
-      </div>
+      {isBestSeller && (
+        <div className="absolute top-5 left-5 z-20">
+          <span className="text-red text-xs bg-white  px-4 py-2 rounded-full font-semibold">Best Seller</span>
+        </div>
+      )}
       
       <div className="group overflow-hidden aspect-square bg-gray-50 flex items-center justify-center">
         <Image 

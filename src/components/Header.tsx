@@ -4,6 +4,7 @@ import { NAV_ITEMS } from "@/lib/contants";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import DropDownMenu from "./DropDownMenu";
+import FavoritesDropdown from "./FavoritesDropdown";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { getCurrentUser } from "@/lib/auth/action";
@@ -44,6 +45,7 @@ export default function Header() {
       </nav>
 
       <div className="flex gap-4 items-center">
+        <FavoritesDropdown />
         <Link href={"/cart"}>
           <ShoppingCart />
         </Link>

@@ -10,5 +10,6 @@ export { genders } from './gender'
 export { brands } from './brand' 
 export { products } from './product'
 export { sizes } from './size'
+export { favorites } from './favorites'
 
 

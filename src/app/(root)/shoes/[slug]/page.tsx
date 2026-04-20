@@ -4,10 +4,11 @@ import ReviewSection from "@/components/ReviewSection";
 import ShoeImageCard from "@/components/ShoeImageCard";
 import ShoeSizes from "@/components/ShoeSizes";
 import { Button } from "@/components/ui/button";
+import FavoriteButton from "@/components/FavoriteButton";
 import { getProductById } from "@/lib/actions/products";
 import { products, SHOES } from "@/lib/contants";
 import Image from "next/image";
-import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Heart } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
 import { ProductType } from "@/lib/types";
 import AddToBag from "@/components/AddToBag";
 
@@ -27,7 +28,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 {
           <figure className="relative w-full lg:w-[28rem] h-[34rem] rounded-md overflow-hidden flex justify-center items-center">
             <Image
-              src={product.image}
+              src={product.image || "/shoes/shoe-1.jpg"}
               alt={product.name}
               width={600}
               height={600}
@@ -47,9 +48,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
             <div className="flex flex-col gap-4 py-4">
               <AddToBag product={product}/>
-              <Button className="py-7 rounded-full border-1 border-black" variant="outline">
-                <Heart /> Favourite
-              </Button>
+              <FavoriteButton product={product} />
             </div>
 
             <div className="flex flex-col gap-4 py-10">

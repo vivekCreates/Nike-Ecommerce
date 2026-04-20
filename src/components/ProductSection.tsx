@@ -11,9 +11,13 @@ const products = await getAllProducts();
         <h1 className='text-3xl font-semibold'>Air Max</h1>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 flex-wrap">
             {
-              products.map(({id,name,price,image})=>(
-                <ProductCard key={id} id={id} name={name!} price={price} image={image!}/>
-              ))
+              products && products.length > 0 ? products.slice(0, 4).map(({id,name,price,image})=>(  // Limit to 4 products
+                <ProductCard key={id} id={id} name={name} price={price} image={image}/>
+              )) : (
+                <div className="col-span-full text-center py-10">
+                  <p className="text-gray-500">No products available</p>
+                </div>
+              )
             }
         </div>
     </div>
